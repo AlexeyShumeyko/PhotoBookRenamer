@@ -1,9 +1,8 @@
-name: Build and Release
+name: Build Test
 
 on:
   push:
     tags: ['v*']
-  workflow_dispatch:
 
 jobs:
   build:
@@ -18,18 +17,17 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         
-    - name: Display version
-      run: echo "Building version ${{ github.ref_name }}"
-      
-    - name: Create placeholder files
+    - name: Test Build
       run: |
-        mkdir -p installer
-        echo "PhotoBook Renamer PRO ${{ github.ref_name }}" > installer/PhotoBookRenamerPRO-${{ github.ref_name }}.txt
-        echo "This is a placeholder for the real installer" >> installer/PhotoBookRenamerPRO-${{ github.ref_name }}.txt
+        echo "✅ CI/CD работает!"
+        echo "Следующий шаг - добавить реальную сборку"
+        echo "Сейчас создаём тестовый файл..."
+        mkdir -p dist
+        echo "PhotoBook Renamer PRO" > dist/README.txt
+        echo "Version: ${{ github.ref_name }}" >> dist/README.txt
         
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+    - name: Upload Test Artifact
+      uses: actions/upload-artifact@v4
       with:
-        files: |
-          installer/*.txt
-        generate_release_notes: true
+        name: test-build-${{ github.ref_name }}
+        path: dist/
