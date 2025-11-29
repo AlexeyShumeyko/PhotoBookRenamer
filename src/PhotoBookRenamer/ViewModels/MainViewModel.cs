@@ -1,6 +1,9 @@
 ﻿using PhotoBookRenamer.Models;
 using PhotoBookRenamer.Services;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PhotoBookRenamer.ViewModels
 {
@@ -44,6 +47,7 @@ namespace PhotoBookRenamer.ViewModels
         public System.Windows.Input.ICommand OpenFoldersCommand { get; private set; }
         public System.Windows.Input.ICommand ExportWithDialogCommand { get; private set; }
         public System.Windows.Input.ICommand ResetCommand { get; private set; }
+        public System.Windows.Input.ICommand SwitchToStartCommand { get; private set; }
 
         private void InitializeCommands()
         {
@@ -64,9 +68,15 @@ namespace PhotoBookRenamer.ViewModels
             ExportCommand = new RelayCommand(async () => await ExportAsync());
 
             OpenFilesCommand = new RelayCommand(() => { });
+
             OpenFoldersCommand = new RelayCommand(() => { });
+
             ExportWithDialogCommand = new RelayCommand(async () => await ExportAsync());
+
             ResetCommand = new RelayCommand(() => { });
+
+            SwitchToStartCommand = new RelayCommand(
+            () => CurrentViewModel = new StartScreenViewModel(this));
         }
 
         private async Task ExportAsync()

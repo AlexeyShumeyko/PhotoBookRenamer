@@ -12,11 +12,11 @@ namespace PhotoBookRenamer.ViewModels
         {
             _mainViewModel = mainViewModel;
 
-            SwitchToUniqueFoldersCommand = new RelayCommand(
-            () => _mainViewModel.CurrentViewModel = new UniqueFoldersViewModel(_mainViewModel, _mainViewModel.FileService));
+            //SwitchToUniqueFoldersCommand = new RelayCommand(
+            //() => _mainViewModel.CurrentViewModel = new UniqueFoldersViewModel(_mainViewModel, _mainViewModel.FileService));
 
-            SwitchToCombinedModeCommand = new RelayCommand(
-                () => _mainViewModel.CurrentViewModel = new CombinedModeViewModel(_mainViewModel, _mainViewModel.FileService));
+            //SwitchToCombinedModeCommand = new RelayCommand(
+            //    () => _mainViewModel.CurrentViewModel = new CombinedModeViewModel(_mainViewModel, _mainViewModel.FileService));
         }
 
         public bool IsLoading
@@ -25,11 +25,15 @@ namespace PhotoBookRenamer.ViewModels
             set => Set(ref _isLoading, value);
         }
 
-        public ICommand SwitchToUniqueFoldersCommand { get; }
-        public ICommand SwitchToCombinedModeCommand { get; }
+        //public ICommand SwitchToUniqueFoldersCommand { get; }
+        //public ICommand SwitchToCombinedModeCommand { get; }
         public ICommand OpenFilesCommand => new RelayCommand(() => { });
         public ICommand OpenFoldersCommand => new RelayCommand(() => { });
         public ICommand ExportWithDialogCommand => new RelayCommand(() => { });
         public ICommand ResetCommand => new RelayCommand(() => { });
+
+        public ICommand SwitchToUniqueFoldersCommand => _mainViewModel.SwitchToUniqueFoldersCommand;
+        public ICommand SwitchToCombinedModeCommand => _mainViewModel.SwitchToCombinedModeCommand;
+        public ICommand SwitchToStartCommand => _mainViewModel.SwitchToStartCommand;
     }
 }

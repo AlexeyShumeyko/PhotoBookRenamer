@@ -14,8 +14,9 @@
                 <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Converter -->
+            <!-- Converters -->
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
 
             <!-- DataTemplates для связки ViewModel -> View -->
             <DataTemplate DataType="{x:Type viewModels:StartScreenViewModel}">
