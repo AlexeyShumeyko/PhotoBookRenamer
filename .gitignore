@@ -17,3 +17,21 @@ bld/
 # NuGet
 packages/
 *.nupkg
+
+# WPF and Visual Studio
+*.user
+*.vs
+*.csproj.user
+*.suo
+*.build
+TestResults/
+[Tt]est[Rr]esult*
+*.cache
+*.orig
+*.log
+*.sdf
+*.opensdf
+*.pfx
+*.publishsettings
+*.nupkg
+*.iws
