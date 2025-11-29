@@ -1,0 +1,35 @@
+name: Build and Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Display version
+      run: echo "Building version ${{ github.ref_name }}"
+      
+    - name: Create placeholder files
+      run: |
+        mkdir -p installer
+        echo "PhotoBook Renamer PRO ${{ github.ref_name }}" > installer/PhotoBookRenamerPRO-${{ github.ref_name }}.txt
+        echo "This is a placeholder for the real installer" >> installer/PhotoBookRenamerPRO-${{ github.ref_name }}.txt
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          installer/*.txt
+        generate_release_notes: true
